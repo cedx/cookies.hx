@@ -1,0 +1,11 @@
+{
+  "classPath": "src/",
+  "contributors": ["cedx"],
+  "description": "Service for interacting with the HTTP cookies. A simple and event-based API to manage cookies.",
+  "license": "MIT",
+  "name": "cookies",
+  "releasenote": "Initial release.",
+  "tags": ["browser", "cookie", "events", "html", "js", "service"],
+  "url": "https://docs.belin.io/cookies.hx",
+  "version": "1.0.0"
+}
