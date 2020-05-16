@@ -5,7 +5,7 @@
   "license": "MIT",
   "name": "cookies",
   "releasenote": "Initial release.",
-  "tags": ["browser", "cookie", "events", "html", "js", "service"],
+  "tags": ["browser", "cookies", "events", "html", "js", "service"],
   "url": "https://docs.belin.io/cookies.hx",
   "version": "1.0.0"
 }
