@@ -70,7 +70,7 @@ class Cookies extends EventTarget {
 		Gets the deserialized value associated to the specified `key`.
 		Returns the given `defaultValue` if the cookie does not exist.
 	**/
-	public function getObject(key: String, ?defaultValue: Any): Null<Dynamic> {
+	public function getObject(key: String, ?defaultValue: Any): Dynamic {
 		try {
 			final value = get(key);
 			return value != null ? Json.parse(value) : defaultValue;
