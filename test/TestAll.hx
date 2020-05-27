@@ -1,5 +1,5 @@
-import cookies.*;
 import Mocha.*;
+import cookies.*;
 import haxe.ds.List;
 import utest.Assert;
 
