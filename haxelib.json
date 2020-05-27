@@ -1,7 +1,7 @@
 {
 	"classPath": "src/",
 	"contributors": ["cedx"],
-	"description": "Service for interacting with the HTTP cookies. A simple and event-based API to manage cookies.",
+	"description": "Service for interacting with the HTTP cookies. An event-based API to manage cookie changes.",
 	"license": "MIT",
 	"name": "cookies",
 	"releasenote": "Initial release.",
