@@ -6,17 +6,15 @@
 Service for interacting with the [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies),
 in [Haxe](https://haxe.org) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
-## Documentation
-- [User guide](https://docs.belin.io/cookies.hx)
-- [API reference](https://api.belin.io/cookies.hx)
+## Quick start
+Install the latest version of **Cookies.hx** with your favorite package manager:
 
-## Packages
-- Haxe: `cookies` on [Haxelib](https://lib.haxe.org/p/cookies)
-- JavaScript: `@cedx/cookies.hx` on [npm](https://www.npmjs.com/package/@cedx/cookies.hx)
+=== "Haxe"
+		:::shell
+		haxelib install cookies
 
-## Development
-- [Git repository](https://git.belin.io/cedx/cookies.hx)
-- [Submit an issue](https://git.belin.io/cedx/cookies.hx/issues)
+=== "JavaScript"
+		:::shell
+		npm install @cedx/cookies.hx
 
-## License
-[Cookies.hx](https://docs.belin.io/cookies.hx) is distributed under the MIT License.
+For detailed instructions, see the [installation guide](installation.md).

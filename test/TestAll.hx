@@ -1,5 +1,5 @@
-import cookies.*;
 import Mocha.*;
+import cookies.*;
 import haxe.ds.List;
 import utest.Assert;
 
@@ -7,7 +7,7 @@ import utest.Assert;
 class TestAll {
 
 	/** Application entry point. **/
-	public static function main(): Void {
+	static function main(): Void {
 		Assert.results = new List();
 		describe("CookieOptions", new CookieOptionsTest().run);
 		describe("Cookies", new CookiesTest().run);
