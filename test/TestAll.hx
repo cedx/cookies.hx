@@ -7,7 +7,7 @@ import utest.Assert;
 class TestAll {
 
 	/** Application entry point. **/
-	static function main(): Void {
+	static function main() {
 		Assert.results = new List();
 		describe("CookieOptions", new CookieOptionsTest().run);
 		describe("Cookies", new CookiesTest().run);
