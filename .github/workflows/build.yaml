@@ -1,9 +1,7 @@
 name: build
 on:
-  pull_request:
-  push:
-  schedule:
-    - cron: "0 0 1 * *"
+  - pull_request
+  - push
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -11,7 +9,7 @@ jobs:
       - name: Set up Haxe
         uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: 4.1.1
+          haxe-version: 4.1.4
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
@@ -27,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: |
           haxelib install all --always
-          npm install --ignore-scripts
+          npm install
       - name: Run tests
         run: |
           haxe test.hxml
-          npm run test
+          npm test
