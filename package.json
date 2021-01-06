@@ -15,13 +15,13 @@
 	},
 	"devDependencies": {
 		"karma": "^5.1.0",
-		"karma-firefox-launcher": "^1.3.0",
+		"karma-firefox-launcher": "^2.1.0",
 		"karma-mocha": "^2.0.1",
 		"mocha": "^8.0.1",
-		"terser": "^4.8.0"
+		"terser": "^5.5.1"
 	},
 	"engines": {
-		"node": ">=14.0.0"
+		"node": ">=14.15.0"
 	},
 	"exports": {
 		"import": "./lib/index.mjs",
