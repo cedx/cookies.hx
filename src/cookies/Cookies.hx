@@ -3,7 +3,6 @@ package cookies;
 import haxe.DynamicAccess;
 import haxe.Json;
 import js.Browser.*;
-import js.Syntax;
 import js.html.EventTarget;
 import js.html.StorageEvent;
 import js.lib.Object;
@@ -186,19 +185,6 @@ class Cookies extends EventTarget {
 		final cookieOptions = getOptions(options);
 		cookieOptions.expires = Date.fromTime(0);
 		document.cookie = '${key.urlEncode()}=; $cookieOptions';
-	}
-	
-	/** Initializes the class prototype. **/
-	static function __init__(): Void {
-		var proto = Syntax.field(Cookies, "prototype");
-		Object.defineProperty(proto, Syntax.field(Symbol, "iterator"), {
-			value: Syntax.code("function *() { for (const key of this.keys) yield [key, this.get(key)]; }")
-		});
-
-		Object.defineProperties(proto, {
-			keys: {get: proto.get_keys},
-			length: {get: proto.get_length}
-		});
 	}
 }
 
