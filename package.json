@@ -1,12 +1,12 @@
 {
-	"bugs": "https://git.belin.io/cedx/cookies.hx/issues",
+	"bugs": "https://github.com/cedx/cookies.hx/issues",
 	"description": "Service for interacting with the HTTP cookies. An event-based API to manage cookie changes.",
-	"homepage": "https://docs.belin.io/cookies.hx",
+	"homepage": "https://cedx.github.io/cookies.hx",
 	"license": "MIT",
-	"main": "./lib/index.js",
-	"name": "@cedx/cookies.hx",
+	"name": "@cedx/cookies",
+	"private": true,
+	"repository": "cedx/cookies.hx",
 	"type": "commonjs",
-	"types": "./lib/index.d.ts",
 	"version": "1.0.0",
 	"author": {
 		"email": "cedric@belin.io",
@@ -14,40 +14,10 @@
 		"url": "https://belin.io"
 	},
 	"devDependencies": {
-		"karma": "^5.1.0",
-		"karma-firefox-launcher": "^2.1.0",
-		"karma-mocha": "^2.0.1",
-		"mocha": "^8.0.1",
-		"terser": "^5.5.1"
+		"playwright": "^1.16.3",
+		"serve-handler": "^6.1.3"
 	},
 	"engines": {
-		"node": ">=14.15.0"
-	},
-	"exports": {
-		"import": "./lib/index.mjs",
-		"require": "./lib/index.js"
-	},
-	"files": [
-		"build/",
-		"lib/"
-	],
-	"funding": {
-		"type": "patreon",
-		"url": "https://www.patreon.com/cedx"
-	},
-	"keywords": [
-		"browser",
-		"cookies",
-		"events",
-		"html",
-		"service"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://git.belin.io/cedx/cookies.hx.git"
-	},
-	"scripts": {
-		"prepack": "pwsh tool/dist.ps1",
-		"test": "karma start etc/karma.js"
+		"node": ">=16.0.0"
 	}
 }

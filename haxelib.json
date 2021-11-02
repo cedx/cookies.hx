@@ -6,6 +6,6 @@
 	"name": "cookies",
 	"releasenote": "Initial release.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service"],
-	"url": "https://docs.belin.io/cookies.hx",
+	"url": "https://cedx.github.io/cookies.hx",
 	"version": "1.0.0"
 }
