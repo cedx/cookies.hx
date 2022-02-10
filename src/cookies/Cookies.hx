@@ -12,8 +12,6 @@ import js.lib.Error.TypeError;
 using StringTools;
 
 /** Provides access to the [HTTP Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies). **/
-@:expose
-@:require(js)
 class Cookies extends EventTarget {
 
 	/** The default cookie options. **/
@@ -97,7 +95,7 @@ class Cookies extends EventTarget {
 		Otherwise calls `ifAbsent` to get a new value, associates `key` to that value, and then returns the new value.
 	**/
 	public function putIfAbsent(key: String, ifAbsent: () -> String, ?options: CookieOptions): String {
-		if (!has(key)) set(key, ifAbsent(), options);
+		if (!exists(key)) set(key, ifAbsent(), options);
 		return get(key);
 	}
 
@@ -108,7 +106,7 @@ class Cookies extends EventTarget {
 		Otherwise calls `ifAbsent` to get a new value, serializes and associates `key` to that value, and then returns the new value.
 	**/
 	public function putObjectIfAbsent(key: String, ifAbsent: () -> Any, ?options: CookieOptions): Dynamic {
-		if (!has(key)) setObject(key, ifAbsent(), options);
+		if (!exists(key)) setObject(key, ifAbsent(), options);
 		return getObject(key);
 	}
 
@@ -128,11 +126,11 @@ class Cookies extends EventTarget {
 		Returns this instance, throws a `TypeError` if specified key is invalid.
 	**/
 	public function set(key: String, value: String, ?options: CookieOptions): Cookies {
-		if (!key.length) throw new TypeError("Invalid cookie name.");
+		if (key.length == 0) throw new Exception("Invalid cookie name."); // TODO: replace by Outcome!
 
 		final cookieOptions = getOptions(options).toString();
 		var cookieValue = '${key.urlEncode()}=${value.urlEncode()}';
-		if (cookieOptions.length) cookieValue += '; $cookieOptions';
+		if (cookieOptions.length > 0) cookieValue += '; $cookieOptions';
 
 		final oldValue = get(key);
 		document.cookie = cookieValue;
@@ -181,7 +179,7 @@ class Cookies extends EventTarget {
 
 	/** Removes the value associated to the specified `key`. **/
 	function removeItem(key: String, ?options: CookieOptions): Void {
-		if (!has(key)) return;
+		if (!exists(key)) return;
 		final cookieOptions = getOptions(options);
 		cookieOptions.expires = Date.fromTime(0);
 		document.cookie = '${key.urlEncode()}=; $cookieOptions';
@@ -204,12 +202,11 @@ private class CookieIterator {
 	}
 
 	/** Returns a value indicating whether the iteration is complete. **/
-	public function hasNext(): Bool
-		return keys.hasNext();
+	public function hasNext() return index < keys.length;
 
 	/** Returns the current item of the iterator and advances to the next one. **/
 	public function next(): {key: String, value: String} {
-		final key = keys.next();
+		final key = keys[index++];
 		return {key: key, value: cookies.get(key)};
 	}
 }

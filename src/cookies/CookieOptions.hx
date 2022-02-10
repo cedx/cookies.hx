@@ -5,12 +5,10 @@ import js.lib.Date as JsDate;
 using DateTools;
 
 /** Defines the attributes of a HTTP cookie. **/
-@:expose
-@:require(js)
-class CookieOptions {
+@:structInit class CookieOptions {
 
 	/** The domain for which the cookie is valid. **/
-	public var domain: String = "";
+	public var domain = "";
 
 	/** The expiration date and time for the cookie. A `null` reference indicates a session cookie. **/
 	public var expires: Null<Date> = null;
@@ -19,10 +17,13 @@ class CookieOptions {
 	public var maxAge(get, set): Int;
 
 	/** The path to which the cookie applies. **/
-	public var path: String = "";
+	public var path = "";
+
+	/** The cross-site requests policy. **/
+	public var sameSite: Null<SameSite> = null;
 
 	/** Value indicating whether to transmit the cookie over HTTPS only. **/
-	public var secure: Bool = false;
+	public var secure = false;
 
 	/** Creates new cookie options. **/
 	public function new(?options: CookieOptionsParams)
@@ -43,7 +44,7 @@ class CookieOptions {
 
 	/** Sets maximum duration, in seconds, until the cookie expires. A negative value indicates a session cookie. **/
 	function set_maxAge(value: Int): Int {
-		expires = value < 0 ? null : Date.now().delta(value * 1000);
+		expires = value < 0 ? null : Date.now().delta(value.seconds());
 		return maxAge;
 	}
 
@@ -68,9 +69,10 @@ class CookieOptions {
 	/** Returns a string representation of this object. **/
 	public function toString(): String {
 		final value = [];
-		if (expires != null) value.push('expires=${JsDate.fromHaxeDate(expires).toUTCString()}');
 		if (domain.length > 0) value.push('domain=$domain');
+		if (expires != null) value.push('expires=${JsDate.fromHaxeDate(expires).toUTCString()}');
 		if (path.length > 0) value.push('path=$path');
+		if (sameSite != null) value.push('samesite=$sameSite');
 		if (secure) value.push("secure");
 		return value.join("; ");
 	}
@@ -80,17 +82,20 @@ class CookieOptions {
 typedef CookieOptionsParams = {
 
 	/** The domain for which the cookie is valid. **/
-	var ?domain: String;
+	?domain: String,
 
 	/** The expiration date and time for the cookie. A `null` reference indicates a session cookie. **/
-	var ?expires: Date;
+	?expires: Date,
 
 	/** The maximum duration, in seconds, until the cookie expires. A negative value indicates a session cookie. **/
-	var ?maxAge: Int;
+	?maxAge: Int,
 
 	/** The path to which the cookie applies. **/
-	var ?path: String;
+	?path: String,
+
+	/** The cross-site requests policy. **/
+	?sameSite: SameSite,
 
 	/** Value indicating whether to transmit the cookie over HTTPS only. **/
-	var ?secure: Bool;
+	?secure: Bool
 }
