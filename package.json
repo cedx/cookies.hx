@@ -1,11 +1,11 @@
 {
-	"bugs": "https://github.com/cedx/cookies.hx/issues",
-	"description": "Service for interacting with the HTTP cookies. An event-based API to manage cookie changes.",
-	"homepage": "https://cedx.github.io/cookies.hx",
+	"bugs": "https://bitbucket.org/cedx/cookies.hx/issues",
+	"description": "Service for interacting with the HTTP cookies.",
+	"homepage": "https://bitbucket.org/cedx/cookies.hx",
 	"license": "MIT",
 	"name": "@cedx/cookies",
 	"private": true,
-	"repository": "cedx/cookies.hx",
+	"repository": "bitbucket:cedx/cookies.hx",
 	"type": "commonjs",
 	"version": "1.0.0",
 	"author": {
@@ -14,7 +14,7 @@
 		"url": "https://belin.io"
 	},
 	"devDependencies": {
-		"playwright": "^1.16.3",
+		"playwright": "^1.18.1",
 		"serve-handler": "^6.1.3"
 	},
 	"engines": {

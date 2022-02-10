@@ -1,11 +1,12 @@
 {
 	"classPath": "src/",
 	"contributors": ["cedx"],
-	"description": "Service for interacting with the HTTP cookies. An event-based API to manage cookie changes.",
+	"dependencies": {"tink_core": ""},
+	"description": "Service for interacting with the HTTP cookies.",
 	"license": "MIT",
 	"name": "cookies",
 	"releasenote": "Initial release.",
-	"tags": ["browser", "cookies", "events", "html", "js", "service"],
-	"url": "https://cedx.github.io/cookies.hx",
+	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
+	"url": "https://bitbucket.org/cedx/cookies.hx",
 	"version": "1.0.0"
 }
