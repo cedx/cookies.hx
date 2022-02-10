@@ -1,22 +1,16 @@
-# Cookies.hx
-![Haxe](https://badgen.net/badge/haxe/%3E%3D4.1.0/green) ![Haxelib](https://badgen.net/haxelib/v/cookies) ![Downloads](https://badgen.net/haxelib/d/cookies)  
-![Node.js](https://badgen.net/npm/node/@cedx/cookies.hx) ![npm](https://badgen.net/npm/v/@cedx/cookies.hx) ![Types](https://badgen.net/npm/types/@cedx/cookies.hx) ![Downloads](https://badgen.net/npm/dt/@cedx/cookies.hx)  
-![License](https://badgen.net/badge/license/MIT/blue) ![Build](https://badgen.net/github/checks/cedx/cookies.hx)
+# Cookies for Haxe
+![Haxe](https://flat.badgen.net/badge/haxe/%3E%3D4.2.0/green) ![Haxelib](https://flat.badgen.net/haxelib/v/cookies) ![License](https://flat.badgen.net/haxelib/license/cookies) ![Downloads](https://flat.badgen.net/haxelib/d/cookies)
 
-Service for interacting with the [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies),
-in [Haxe](https://haxe.org) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+Service for interacting with the [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies), in [Haxe](https://haxe.org).
 
 ## Documentation
-- [User guide](https://docs.belin.io/cookies.hx)
-- [API reference](https://api.belin.io/cookies.hx)
-
-## Packages
-- Haxe: `cookies` on [Haxelib](https://lib.haxe.org/p/cookies)
-- JavaScript: `@cedx/cookies.hx` on [npm](https://www.npmjs.com/package/@cedx/cookies.hx)
+- [User guide](https://bitbucket.org/cedx/cookies.hx/wiki)
+- [API reference](https://cedx.github.io/cookies.hx)
 
 ## Development
-- [Git repository](https://git.belin.io/cedx/cookies.hx)
-- [Submit an issue](https://git.belin.io/cedx/cookies.hx/issues)
+- [Git repository](https://bitbucket.org/cedx/cookies.hx)
+- [Haxelib package](https://lib.haxe.org/p/cookies)
+- [Submit an issue](https://bitbucket.org/cedx/cookies.hx/issues)
 
 ## License
-[Cookies.hx](https://docs.belin.io/cookies.hx) is distributed under the MIT License.
+[Cookies for Haxe](https://bitbucket.org/cedx/cookies.hx) is distributed under the MIT License.
