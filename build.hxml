@@ -1,7 +1,6 @@
---class-path src
---define analyzer-optimize
---define js-es=6
---js lib/cookies.js
+--js var/bundle.js
+share/build.hxml
 
 cookies.CookieOptions
 cookies.Cookies
+cookies.SameSite

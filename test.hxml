@@ -1,7 +1,7 @@
---class-path src
 --class-path test
---define js-es=6
---define UTEST_FAILURE_THROW
 --js var/tests.js
---library utest
---main TestAll
+--library deep_equal
+--library tink_unittest
+--main RunTests
+share/build.hxml
+--cmd node test/RunTests.js
