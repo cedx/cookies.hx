@@ -8,7 +8,7 @@ import tink.unit.TestBatch;
 function main() {
 	final tests = TestBatch.make([
 		new cookies.CookieOptionsTest(),
-		new cookies.CookiesTest()
+		//new cookies.CookieStoreTest()
 	]);
 
 	ANSI.stripIfUnavailable = false;
