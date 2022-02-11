@@ -396,8 +396,20 @@ using StringTools;
 	}
 
 	/** Tests the `toString()` method. **/
-	public function testToString()
-		return assert(new CookieStore().toString() == document.cookie);
+	public function testToString() {
+		// It should return an empty string for an empty cookie store.
+		final service = new CookieStore();
+		asserts.assert(service.toString().length == 0);
+
+		// It should return a non-empty string for a non-empty cookie store.
+		setCookie("foo", "bar");
+		setCookie("prefix:baz", "qux");
+		asserts.assert(service.toString() == "foo=bar; prefix:baz=qux");
+
+		// It should handle the key prefix.
+		asserts.assert(new CookieStore({keyPrefix: "prefix:"}).toString() == "baz=qux");
+		return asserts.done();
+	}
 
 	/** Gets the value of the cookie with the specified name. **/
 	inline function getCookie(name: String) return CookieStore.all[name];
