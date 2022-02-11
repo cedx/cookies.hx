@@ -6,6 +6,9 @@ using Lambda;
 using StringTools;
 
 /** Provides access to the [HTTP Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies). **/
+#if tink_json
+@:jsonStringify(cookieStore -> [for (key => value in cookieStore) key => value])
+#end
 class CookieStore {
 
 	/** The map of all cookies. **/
@@ -110,7 +113,7 @@ class CookieStore {
 	public function remove(key: String, ?options: CookieOptions) {
 		final oldValue = get(key);
 		removeItem(buildKey(key), options);
-		onChangeTrigger.trigger(new CookieEvent(Some(key), oldValue));
+		onChangeTrigger.trigger(new CookieEvent(key, oldValue));
 		return oldValue;
 	}
 
@@ -124,7 +127,7 @@ class CookieStore {
 
 		final oldValue = get(key);
 		document.cookie = cookie;
-		onChangeTrigger.trigger(new CookieEvent(Some(key), oldValue, Some(value)));
+		onChangeTrigger.trigger(new CookieEvent(key, oldValue, Some(value)));
 		return Success(Noise);
 	}
 
