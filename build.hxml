@@ -1,6 +1,7 @@
 --js var/bundle.js
 share/build.hxml
 
+cookies.CookieEvent
 cookies.CookieOptions
-cookies.Cookies
+cookies.CookieStore
 cookies.SameSite
