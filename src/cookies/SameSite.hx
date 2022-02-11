@@ -1,6 +1,6 @@
 package cookies;
 
-/** Defines the values of the `SameSite` cookie attrbite. **/
+/** Defines the values of the `SameSite` cookie attribute. **/
 enum abstract SameSite(String) to String {
 
 	/** Only send cookies for top level navigation requests. **/

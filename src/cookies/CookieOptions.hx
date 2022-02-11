@@ -1,7 +1,6 @@
 package cookies;
 
 import js.lib.Date as JsDate;
-using DateTools;
 
 /** Defines the attributes of a HTTP cookie. **/
 @:structInit class CookieOptions {

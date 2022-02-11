@@ -8,6 +8,9 @@ using StringTools;
 /** Provides access to the [HTTP Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies). **/
 class CookieStore {
 
+	/** The map of all cookies. **/
+	public static var all(get, never): Map<String, String>;
+
 	/** The default cookie options. **/
 	public final defaults = new CookieOptions();
 
@@ -35,9 +38,19 @@ class CookieStore {
 		}
 	}
 
+	/** Gets the map of all cookies. **/
+	static function get_all() {
+		final cookies = document.cookie.length == 0 ? [] : [for (item in document.cookie.split(";")) {
+			final parts = item.ltrim().split("=");
+			if (parts.length >= 2) new Named(parts[0], parts.slice(1).join("=").urlDecode());
+		}];
+
+		return [for (cookie in cookies) cookie.name => cookie.value];
+	}
+
 	/** Gets the keys of this cookie store. **/
 	function get_keys()
-		return [for (key in getAllCookies().keys()) if (key.startsWith(keyPrefix)) key.substring(keyPrefix.length)];
+		return [for (key in all.keys()) if (key.startsWith(keyPrefix)) key.substring(keyPrefix.length)];
 
 	/** Gets the number of entries in this cookie store. **/
 	inline function get_length() return keys.length;
@@ -46,11 +59,11 @@ class CookieStore {
 	public function clear(?options: CookieOptions) keys.iter(key -> remove(key, options));
 
 	/** Gets a value indicating whether this cookie store contains the specified `key`. **/
-	public function exists(key: String) return getAllCookies().exists(buildKey(key));
+	public function exists(key: String) return all.exists(buildKey(key));
 
 	/** Gets the value associated to the specified `key`. Returns `None` if the `key` does not exist. **/
 	public function get(key: String): Option<String> {
-		final value = getAllCookies().get(buildKey(key));
+		final value = all[buildKey(key)];
 		return value == null ? None : Some(value);
 	}
 
@@ -59,7 +72,7 @@ class CookieStore {
 		Returns `None` if the `key` does not exist or its value cannot be deserialized.
 	**/
 	public function getObject<T>(key: String): Option<T> {
-		final value = getAllCookies().get(buildKey(key));
+		final value = all[buildKey(key)];
 		return value == null ? None : switch Error.catchExceptions(() -> Json.parse(value)) {
 			case Failure(_): None;
 			case Success(json): Some(json);
@@ -96,27 +109,21 @@ class CookieStore {
 	**/
 	public function remove(key: String, ?options: CookieOptions) {
 		final oldValue = get(key);
-		// TODO: removeValue(buildKey(key), options);
+		removeItem(buildKey(key), options);
 		onChangeTrigger.trigger(new CookieEvent(Some(key), oldValue));
 		return oldValue;
 	}
 
 	/** Associates a given `value` to the specified `key`. **/
 	public function set(key: String, value: String, ?options: CookieOptions): Outcome<Noise, Error> {
-		// TODO ??? if (key.length == 0) throw new Exception("Invalid cookie name."); // TODO: replace by Outcome!
+		if (key.length == 0) return Failure(new Error(BadRequest, "Invalid cookie name."));
 
-		/* TODO
 		final cookieOptions = getOptions(options).toString();
-		var cookieValue = '${key.urlEncode()}=${value.urlEncode()}';
-		if (cookieOptions.length > 0) cookieValue += '; $cookieOptions';
+		var cookie = '$key=${value.urlEncode()}';
+		if (cookieOptions.length > 0) cookie += '; $cookieOptions';
 
 		final oldValue = get(key);
-		document.cookie = cookieValue;
-		emit(key, oldValue, value);
-		return this;*/
-
-		final oldValue = get(key);
-		// TODO document.cookie = cookieValue;
+		document.cookie = cookie;
 		onChangeTrigger.trigger(new CookieEvent(Some(key), oldValue, Some(value)));
 		return Success(Noise);
 	}
@@ -133,40 +140,31 @@ class CookieStore {
 	public function toJSON() return [for (key => value in this) [key, value]];
 	#end
 
+	/** Returns a string representation of this object. **/
+	public inline function toString() return document.cookie;
+
 	/** Builds a normalized storage key from the given `key`. **/
 	function buildKey(key: String) return '$keyPrefix$key';
 
-	/** Returns a map of all cookies. **/
-	function getAllCookies() {
-		final map: Map<String, String> = [];
-		for (cookie in document.cookie.split(";")) {
-			final parts = cookie.ltrim().split("=");
-			if (parts.length < 2) continue;
-			map[parts[0]] = parts[1].urlDecode(); // TODO: parts[0].urlDecode() ?
-		}
-
-		return map;
-	}
-
 	/** Merges the default cookie options with the specified ones. **/
-	/*
 	function getOptions(?options: CookieOptions): CookieOptions {
 		if (options == null) options = new CookieOptions();
-		return new CookieOptions({
-			domain: options.domain.length > 0 ? options.domain : defaults.domain,
-			expires: options.expires != null ? options.expires : defaults.expires,
-			path: options.path.length > 0 ? options.path : defaults.path,
-			secure: options.secure ? options.secure : defaults.secure
-		});
-	}*/
+		return {
+			domain: options.domain.or(defaults.domain.orNull()),
+			expires: options.expires.or(defaults.expires.orNull()),
+			maxAge: options.maxAge.or(defaults.maxAge.orNull()),
+			path: options.path.or(defaults.path.orNull()),
+			sameSite: options.sameSite.or(defaults.sameSite.orNull()),
+			secure: options.secure.or(defaults.secure.orNull())
+		};
+	}
 
 	/** Removes the value associated to the specified `key`. **/
-	function removeValue(key: String, ?options: CookieOptions) {
-		/* TODO
-		if (!exists(key)) return;
+	function removeItem(key: String, ?options: CookieOptions) {
 		final cookieOptions = getOptions(options);
-		cookieOptions.expires = Date.fromTime(0);
-		document.cookie = '${key.urlEncode()}=; $cookieOptions'; */
+		cookieOptions.expires = Some(Date.fromTime(0));
+		cookieOptions.maxAge = Some(0);
+		document.cookie = '$key=; $cookieOptions';
 	}
 }
 
