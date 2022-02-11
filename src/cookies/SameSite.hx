@@ -9,6 +9,6 @@ enum abstract SameSite(String) to String {
 	/** No restrictions on cross-site requests. **/
 	var None = "none";
 
-	/** Prevents the cookie from being sent by the browser to the target site in all cross-site browsing context, even when following a regular link. **/
+	/** Prevents the cookie from being sent to the target site in all cross-site browsing context. **/
 	var Strict = "strict";
 }

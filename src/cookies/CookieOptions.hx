@@ -1,6 +1,5 @@
 package cookies;
 
-import haxe.DynamicAccess;
 import js.lib.Date as JsDate;
 using DateTools;
 
@@ -8,94 +7,42 @@ using DateTools;
 @:structInit class CookieOptions {
 
 	/** The domain for which the cookie is valid. **/
-	public var domain = "";
+	public var domain: Option<String>;
 
-	/** The expiration date and time for the cookie. A `null` reference indicates a session cookie. **/
-	public var expires: Null<Date> = null;
+	/** The expiration date and time for the cookie. **/
+	public var expires: Option<Date>;
 
-	/** The maximum duration, in seconds, until the cookie expires. A negative value indicates a session cookie. **/
-	public var maxAge(get, set): Int;
+	/** The maximum duration, in seconds, until the cookie expires. **/
+	public var maxAge: Option<Int>;
 
 	/** The path to which the cookie applies. **/
-	public var path = "";
+	public var path: Option<String>;
 
 	/** The cross-site requests policy. **/
-	public var sameSite: Null<SameSite> = null;
+	public var sameSite: Option<SameSite>;
 
 	/** Value indicating whether to transmit the cookie over HTTPS only. **/
-	public var secure = false;
+	public var secure: Option<Bool>;
 
 	/** Creates new cookie options. **/
-	public function new(?options: CookieOptionsParams)
-		if (options != null) {
-			if (options.domain != null) domain = options.domain;
-			if (options.expires != null) expires = options.expires;
-			if (options.maxAge != null) maxAge = options.maxAge;
-			if (options.path != null) path = options.path;
-			if (options.secure != null) secure = options.secure;
-		}
-
-	/** Gets the maximum duration, in seconds, until the cookie expires. A negative value indicates a session cookie. **/
-	function get_maxAge(): Int {
-		if (expires == null) return -1;
-		final delta = expires.getTime() - Date.now().getTime();
-		return delta > 0 ? Math.ceil(delta / 1000) : 0;
-	}
-
-	/** Sets maximum duration, in seconds, until the cookie expires. A negative value indicates a session cookie. **/
-	function set_maxAge(value: Int): Int {
-		expires = value < 0 ? null : Date.now().delta(value.seconds());
-		return maxAge;
-	}
-
-	/** Creates new options from the specified cookie string. **/
-	public static function fromString(value: String): CookieOptions {
-		final attributes = ["domain", "expires", "max-age", "path", "secure"];
-		final map = new Map<String, String>();
-		for (option in value.split("; ").slice(1).map(part -> part.split("="))) {
-			final attribute = option[0].toLowerCase();
-			if (attributes.indexOf(attribute) >= 0) map.set(attribute, option[1]);
-		}
-
-		return new CookieOptions({
-			domain: map.exists("domain") ? map.get("domain") : "",
-			expires: map.exists("expires") ? Date.fromString(map.get("expires")) : null,
-			maxAge: map.exists("max-age") ? Std.parseInt(map.get("max-age")) : -1,
-			path: map.exists("path") ? map.get("path") : "",
-			secure: map.exists("secure")
-		});
+	public function new(?domain: String, ?expires: Date, ?maxAge: Int, ?path: String, ?sameSite: SameSite, ?secure: Bool) {
+		this.domain = domain == null ? None : Some(domain);
+		this.expires = expires == null ? None : Some(expires);
+		this.maxAge = maxAge == null ? None : Some(maxAge);
+		this.path = path == null ? None : Some(path);
+		this.sameSite = sameSite == null ? None : Some(sameSite);
+		this.secure = secure == null ? None : Some(secure);
 	}
 
 	/** Returns a string representation of this object. **/
-	public function toString(): String {
+	public function toString() {
 		final value = [];
-		if (domain.length > 0) value.push('domain=$domain');
-		if (expires != null) value.push('expires=${JsDate.fromHaxeDate(expires).toUTCString()}');
-		if (path.length > 0) value.push('path=$path');
-		if (sameSite != null) value.push('samesite=$sameSite');
-		if (secure) value.push("secure");
+		if (domain != None) value.push('domain=${domain.sure()}');
+		if (expires != None) value.push('expires=${JsDate.fromHaxeDate(expires.sure()).toUTCString()}');
+		if (maxAge != None) value.push('max-age=${maxAge.sure()}');
+		if (path != None) value.push('path=${path.sure()}');
+		if (sameSite != None) value.push('samesite=${sameSite.sure()}');
+		if (secure.equals(true)) value.push("secure");
 		return value.join("; ");
 	}
-}
-
-/** Defines the parameters of a `CookieOptions` instance. **/
-typedef CookieOptionsParams = {
-
-	/** The domain for which the cookie is valid. **/
-	?domain: String,
-
-	/** The expiration date and time for the cookie. A `null` reference indicates a session cookie. **/
-	?expires: Date,
-
-	/** The maximum duration, in seconds, until the cookie expires. A negative value indicates a session cookie. **/
-	?maxAge: Int,
-
-	/** The path to which the cookie applies. **/
-	?path: String,
-
-	/** The cross-site requests policy. **/
-	?sameSite: SameSite,
-
-	/** Value indicating whether to transmit the cookie over HTTPS only. **/
-	?secure: Bool
 }
