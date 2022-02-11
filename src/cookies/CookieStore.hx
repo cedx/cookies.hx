@@ -116,10 +116,10 @@ class CookieStore {
 
 	/** Associates a given `value` to the specified `key`. **/
 	public function set(key: String, value: String, ?options: CookieOptions): Outcome<Noise, Error> {
-		if (key.length == 0) return Failure(new Error(BadRequest, "Invalid cookie name."));
+		if (key.length == 0 || key.contains("=") || key.contains(";")) return Failure(new Error(BadRequest, "Invalid cookie name."));
 
 		final cookieOptions = getOptions(options).toString();
-		var cookie = '$key=${value.urlEncode()}';
+		var cookie = '${buildKey(key)}=${value.urlEncode()}';
 		if (cookieOptions.length > 0) cookie += '; $cookieOptions';
 
 		final oldValue = get(key);
