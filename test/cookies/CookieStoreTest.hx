@@ -53,99 +53,57 @@ using StringTools;
 		return asserts.done();
 	}
 
-	/** Tests the `addEventListener("change")` method. **/
-	/* TODO
-	public function testAddEventListener() {
-		it("should trigger an event when a cookie is added", function(done) {
-			setCookie("onChanges=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-
-			final listener = event -> {
-				final entries = [...event.detail.entries()];
-				Assert(entries).to.have.lengthOf(1);
-
-				final [key, record] = entries[0];
-				Assert.equals(key).to.equal("onChanges");
-				Assert.equals(record.currentValue).to.equal("foo");
-				Assert(record.previousValue).to.be.undefined;
-
-				done();
-			};
-
-			final service = new CookieStore();
-			service.addEventListener(CookieStore.eventChanges, listener);
-			service.set("onChanges", "foo");
-			service.removeEventListener(CookieStore.eventChanges, listener);
+	/** Tests the `onChange` property. **/
+	public function testOnChange() {
+		// It should trigger an event when a cookie is added.
+		var service = new CookieStore();
+		var subscription = service.onChange.handle(event -> {
+			asserts.assert(event.key == "foo");
+			asserts.assert(event.oldValue == None);
+			asserts.assert(event.newValue.equals("bar"));
 		});
 
-		it("should trigger an event when a cookie is updated", function(done) {
-			setCookie("onChanges=foo";
+		service.set("foo", "bar");
+		subscription.cancel();
 
-			final listener = event -> {
-				final entries = [...event.detail.entries()];
-				Assert(entries).to.have.lengthOf(1);
-
-				final [key, record] = entries[0];
-				Assert.equals(key).to.equal("onChanges");
-				Assert.equals(record.currentValue).to.equal("bar");
-				Assert.equals(record.previousValue).to.equal("foo");
-
-				done();
-			};
-
-			final service = new CookieStore();
-			service.addEventListener(CookieStore.eventChanges, listener);
-			service.set("onChanges", "bar");
-			service.removeEventListener(CookieStore.eventChanges, listener);
+		// It should trigger an event when a cookie is updated.
+		subscription = service.onChange.handle(event -> {
+			asserts.assert(event.key == "foo");
+			asserts.assert(event.oldValue.equals("bar"));
+			asserts.assert(event.newValue.equals("baz"));
 		});
 
-		it("should trigger an event when a cookie is removed", function(done) {
-			setCookie("onChanges=bar";
+		service.set("foo", "baz");
+		subscription.cancel();
 
-			final listener = event -> {
-				final entries = [...event.detail.entries()];
-				Assert(entries).to.have.lengthOf(1);
+		// It should not trigger an event when a cookie is neither added nor updated.
+		subscription = service.onChange.handle(event -> asserts.fail("This event should not have been triggered."));
+		service.putIfAbsent("foo", () -> "qux");
+		subscription.cancel();
 
-				final [key, record] = entries[0];
-				Assert.equals(key).to.equal("onChanges");
-				Assert(record.currentValue).to.be.undefined;
-				Assert.equals(record.previousValue).to.equal("bar");
-
-				done();
-			};
-
-			final service = new CookieStore();
-			service.addEventListener(CookieStore.eventChanges, listener);
-			service.remove("onChanges");
-			service.removeEventListener(CookieStore.eventChanges, listener);
+		// It should trigger an event when a cookie is removed.
+		subscription = service.onChange.handle(event -> {
+			asserts.assert(event.key == "foo");
+			asserts.assert(event.oldValue.equals("baz"));
+			asserts.assert(event.newValue == None);
 		});
 
-		it("should trigger an event when all the cookies are removed", function(done) {
-			setCookie("onChanges1=foo";
-			setCookie("onChanges2=bar";
+		service.remove("foo");
+		subscription.cancel();
 
-			final listener = event -> {
-				final entries = [...event.detail.entries()];
-				Assert(entries).to.have.lengthOf.at.least(2);
-
-				let records = entries.filter(item -> item[0] == "onChanges1").map(item -> item[1]);
-				Assert(records).to.have.lengthOf(1);
-				Assert(records[0].currentValue).to.be.undefined;
-				Assert.equals(records[0].previousValue).to.equal("foo");
-
-				records = entries.filter(item -> item[0] == "onChanges2").map(item -> item[1]);
-				Assert(records).to.have.lengthOf(1);
-				Assert(records[0].currentValue).to.be.undefined;
-				Assert.equals(records[0].previousValue).to.equal("bar");
-
-				done();
-			};
-
-			final service = new CookieStore();
-			service.addEventListener(CookieStore.eventChanges, listener);
-			service.clear();
-			service.removeEventListener(CookieStore.eventChanges, listener);
+		// It should handle the key prefix.
+		service = new CookieStore({keyPrefix: "prefix:"});
+		subscription = service.onChange.handle(event -> {
+			asserts.assert(event.key == "baz");
+			asserts.assert(event.oldValue == None);
+			asserts.assert(event.newValue.equals("qux"));
 		});
-	}*/
+
+		service.set("baz", "qux");
+		subscription.cancel();
+
+		return asserts.done();
+	}
 
 	/** Tests the `clear()` method. **/
 	public function testClear() {
