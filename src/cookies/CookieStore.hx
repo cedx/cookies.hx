@@ -64,14 +64,14 @@ class CookieStore {
 	/** Gets a value indicating whether this cookie store contains the specified `key`. **/
 	public function exists(key: String) return all.exists(buildKey(key));
 
-	/** Gets the value associated to the specified `key`. Returns `None` if the `key` does not exist. **/
+	/** Gets the value associated with the specified `key`. Returns `None` if the `key` does not exist. **/
 	public function get(key: String): Option<String> {
 		final value = all[buildKey(key)];
 		return value == null ? None : Some(value);
 	}
 
 	/**
-		Gets the deserialized value associated to the specified `key`.
+		Gets the deserialized value associated with the specified `key`.
 		Returns `None` if the `key` does not exist or its value cannot be deserialized.
 	**/
 	public function getObject<T>(key: String): Option<T> {
@@ -88,8 +88,8 @@ class CookieStore {
 
 	/**
 		Looks up the value of the specified `key`, or add a new value if it isn't there.
-		Returns the value associated to `key`, if there is one.
-		Otherwise calls `ifAbsent` to get a new value, associates `key` to that value, and then returns the new value.
+		Returns the value associated with `key`, if there is one.
+		Otherwise calls `ifAbsent` to get a new value, associates `key` with that value, and then returns the new value.
 	**/
 	public function putIfAbsent(key: String, ifAbsent: () -> String, ?options: CookieOptions) return switch get(key) {
 		case Some(value): Success(value);
@@ -98,8 +98,8 @@ class CookieStore {
 
 	/**
 		Looks up the value of the specified `key`, or add a new value if it isn't there.
-		Returns the deserialized value associated to `key`, if there is one.
-		Otherwise calls `ifAbsent` to get a new value, serializes it and associates `key` to that value, and then returns the new value.
+		Returns the deserialized value associated with `key`, if there is one.
+		Otherwise calls `ifAbsent` to get a new value, serializes it and associates `key` with that value, and then returns the new value.
 	**/
 	public function putObjectIfAbsent<T>(key: String, ifAbsent: () -> T, ?options: CookieOptions) return switch getObject(key) {
 		case Some(value): Success(value);
@@ -107,7 +107,7 @@ class CookieStore {
 	}
 
 	/**
-		Removes the value associated to the specified `key`.
+		Removes the value associated with the specified `key`.
 		Returns the value associated with the `key` before it was removed.
 	**/
 	public function remove(key: String, ?options: CookieOptions) {
@@ -117,7 +117,7 @@ class CookieStore {
 		return oldValue;
 	}
 
-	/** Associates a given `value` to the specified `key`. **/
+	/** Associates a given `value` with the specified `key`. **/
 	public function set(key: String, value: String, ?options: CookieOptions): Outcome<Noise, Error> {
 		if (key.length == 0 || key.contains("=") || key.contains(";")) return Failure(new Error(BadRequest, "Invalid cookie name."));
 
@@ -131,7 +131,7 @@ class CookieStore {
 		return Success(Noise);
 	}
 
-	/** Serializes and associates a given `value` to the specified `key`. **/
+	/** Serializes and associates a given `value` with the specified `key`. **/
 	public function setObject<T>(key: String, value: T, ?options: CookieOptions): Outcome<Noise, Error>
 		return switch Error.catchExceptions(() -> Json.stringify(value)) {
 			case Failure(_): Failure(new Error(UnprocessableEntity, "Unable to encode the specified value in JSON."));
@@ -163,7 +163,7 @@ class CookieStore {
 		};
 	}
 
-	/** Removes the value associated to the specified `key`. **/
+	/** Removes the value associated with the specified `key`. **/
 	function removeItem(key: String, ?options: CookieOptions) {
 		final cookieOptions = getOptions(options);
 		cookieOptions.expires = Some(Date.fromTime(0));
