@@ -144,7 +144,7 @@ class CookieStore {
 	#end
 
 	/** Returns a string representation of this object. **/
-	public inline function toString()
+	public function toString()
 		return keyPrefix.length == 0 ? document.cookie : [for (key => value in this) '$key=${value.urlEncode()}'].join("; ");
 
 	/** Builds a normalized storage key from the given `key`. **/
