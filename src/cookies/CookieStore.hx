@@ -6,9 +6,7 @@ using Lambda;
 using StringTools;
 
 /** Provides access to the [HTTP Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies). **/
-#if tink_json
 @:jsonStringify(cookieStore -> [for (key => value in cookieStore) key => value])
-#end
 class CookieStore {
 
 	/** The map of all cookies. **/
