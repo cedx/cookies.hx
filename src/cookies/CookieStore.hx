@@ -202,8 +202,8 @@ private class CookieStoreIterator {
 typedef CookieStoreOptions = {
 
 	/** The default cookie options. **/
-	?defaults: CookieOptions,
+	var ?defaults: CookieOptions;
 
 	/** A string prefixed to every key so that it is unique globally in the whole cookie store. **/
-	?keyPrefix: String
+	var ?keyPrefix: String;
 }
