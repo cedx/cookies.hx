@@ -8,5 +8,5 @@
 	"releasenote": "Initial release.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
 	"url": "https://github.com/cedx/cookies.hx",
-	"version": "1.0.0"
+	"version": "1.0.1"
 }
