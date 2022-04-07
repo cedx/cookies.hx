@@ -7,6 +7,6 @@
 	"name": "cookies",
 	"releasenote": "Initial release.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
-	"url": "https://bitbucket.org/cedx/cookies.hx",
+	"url": "https://github.com/cedx/cookies.hx",
 	"version": "1.0.0"
 }

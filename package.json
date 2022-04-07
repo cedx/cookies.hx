@@ -1,11 +1,11 @@
 {
-	"bugs": "https://bitbucket.org/cedx/cookies.hx/issues",
+	"bugs": "https://github.com/cedx/cookies.hx/issues",
 	"description": "Service for interacting with the HTTP cookies.",
-	"homepage": "https://bitbucket.org/cedx/cookies.hx",
+	"homepage": "https://github.com/cedx/cookies.hx",
 	"license": "MIT",
 	"name": "@cedx/cookies",
 	"private": true,
-	"repository": "bitbucket:cedx/cookies.hx",
+	"repository": "github:cedx/cookies.hx",
 	"type": "commonjs",
 	"version": "1.0.0",
 	"author": {

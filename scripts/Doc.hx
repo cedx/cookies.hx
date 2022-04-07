@@ -10,10 +10,10 @@ function main() {
 	Sys.command("lix", [
 		"run", "dox",
 		"--define", "description", "Service for interacting with the HTTP cookies, in Haxe.",
-		"--define", "source-path", "https://bitbucket.org/cedx/cookies.hx/src/main/src",
+		"--define", "source-path", "https://github.com/cedx/cookies.hx/blob/main/src",
 		"--define", "themeColor", "0xffc105",
 		"--define", "version", Json.parse(File.getContent("haxelib.json")).version,
-		"--define", "website", "https://bitbucket.org/cedx/cookies.hx",
+		"--define", "website", "https://github.com/cedx/cookies.hx",
 		"--input-path", "var",
 		"--output-path", "docs",
 		"--title", "Cookies for Haxe",
