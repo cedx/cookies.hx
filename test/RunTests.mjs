@@ -24,22 +24,26 @@ page.on("console", async message => {
 
 await page.evaluateOnNewDocument(() => console.info(navigator.userAgent));
 await page.exposeFunction("exit", async code => {
-	await browser.close();
+	await page.close();
+	await page.browser().close();
 	server.close();
 	process.exit(code);
 });
 
 // Run the test suite.
-await writeFile(join(basePath, "tests.html"), [
-	'<!DOCTYPE html>',
-	'<html dir="ltr" lang="en">',
-	'\t<head><meta charset="UTF-8"/></head>',
-	'\t<body><script src="tests.js"></script></body>',
-	'</html>'
-].join("\n"));
+await writeFile(join(basePath, "tests.html"), `
+	<!DOCTYPE html>
+	<html dir="ltr" lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<script defer src="tests.js"></script>
+	</head>
+	<body></body>
+	</html>
+`);
 
 server.listen(8192);
 await Promise.all([
-	page.waitForNavigation(),
-	page.goto("http://localhost:8192/tests.html")
+	page.goto("http://localhost:8192/tests.html"),
+	page.waitForNavigation()
 ]);
