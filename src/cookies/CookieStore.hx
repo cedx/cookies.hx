@@ -30,7 +30,7 @@ class CookieStore {
 	/** The controller of cookie events. **/
 	final onChangeTrigger: SignalTrigger<CookieEvent> = Signal.trigger();
 
-	/** Creates a new cookie service. **/
+	/** Creates a new cookie store. **/
 	public function new(?options: CookieStoreOptions) {
 		this.onChange = onChangeTrigger.asSignal();
 		if (options != null) {
@@ -145,7 +145,7 @@ class CookieStore {
 	public function toString()
 		return keyPrefix.length == 0 ? document.cookie : [for (key => value in this) '$key=${value.urlEncode()}'].join("; ");
 
-	/** Builds a normalized storage key from the given `key`. **/
+	/** Builds a normalized cookie key from the given `key`. **/
 	function buildKey(key: String) return '$keyPrefix$key';
 
 	/** Merges the default cookie options with the specified ones. **/
