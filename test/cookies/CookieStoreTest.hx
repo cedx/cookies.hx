@@ -76,11 +76,6 @@ using StringTools;
 		service.set("foo", "baz");
 		subscription.cancel();
 
-		// It should not trigger an event when a cookie is neither added nor updated.
-		subscription = service.onChange.handle(event -> asserts.fail("This event should not have been triggered."));
-		service.putIfAbsent("foo", () -> "qux");
-		subscription.cancel();
-
 		// It should trigger an event when a cookie is removed.
 		subscription = service.onChange.handle(event -> {
 			asserts.assert(event.key == "foo");
