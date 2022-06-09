@@ -15,8 +15,9 @@ function main() {
 		// Round 3: "baz => qux"
 	}
 
-	// Loop over entries of the cookie store that use the same key prefix.
 	cookieStore.clear();
+
+	// Loop over entries of the cookie store that use the same key prefix.
 	cookieStore.set("foo", "bar");
 	cookieStore.set("prefix:bar", "baz");
 
