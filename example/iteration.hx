@@ -21,10 +21,10 @@ function main() {
 	cookieStore.set("foo", "bar");
 	cookieStore.set("prefix:bar", "baz");
 
-	final prefixedCookieStore = new CookieStore({keyPrefix: "prefix:"});
-	prefixedCookieStore.set("baz", "qux");
+	final prefixedStore = new CookieStore({keyPrefix: "prefix:"});
+	prefixedStore.set("baz", "qux");
 
-	for (key => value in prefixedCookieStore) {
+	for (key => value in prefixedStore) {
 		trace('$key => $value');
 		// Round 1: "bar => baz"
 		// Round 2: "baz => qux"
