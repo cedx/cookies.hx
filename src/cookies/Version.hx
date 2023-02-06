@@ -1,4 +1,4 @@
-package webstorage;
+package cookies;
 
 #if macro
 import haxe.Json;
