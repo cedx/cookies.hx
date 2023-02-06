@@ -5,7 +5,7 @@ import js.Browser.document;
 using Lambda;
 using StringTools;
 
-/** Provides access to the [HTTP Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies). **/
+/** Provides access to the [HTTP Cookies](https://developer.mozilla.org/docs/Web/HTTP/Cookies). **/
 @:jsonStringify(cookieStore -> [for (key => value in cookieStore) key => value])
 class CookieStore {
 
@@ -17,9 +17,11 @@ class CookieStore {
 
 	/** The keys of this cookie store. **/
 	public var keys(get, never): Array<String>;
+		function get_keys() return [for (key in all.keys()) if (key.startsWith(keyPrefix)) key.substring(keyPrefix.length)];
 
 	/** The number of entries in this cookie store. **/
 	public var length(get, never): Int;
+		inline function get_length() return keys.length;
 
 	/** The stream of cookie events. **/
 	public final onChange: Signal<CookieEvent>;
@@ -48,13 +50,6 @@ class CookieStore {
 
 		return [for (cookie in cookies) cookie.name => cookie.value];
 	}
-
-	/** Gets the keys of this cookie store. **/
-	function get_keys()
-		return [for (key in all.keys()) if (key.startsWith(keyPrefix)) key.substring(keyPrefix.length)];
-
-	/** Gets the number of entries in this cookie store. **/
-	inline function get_length() return keys.length;
 
 	/** Removes all entries from this cookie store. **/
 	public function clear(?options: CookieOptions) keys.iter(key -> remove(key, options));
