@@ -7,7 +7,7 @@
 	"name": "@cedx/cookies",
 	"private": true,
 	"repository": "github:cedx/cookies.hx",
-	"type": "module",
+	"type": "commonjs",
 	"version": "1.0.1",
 	"author": {
 		"email": "cedric@belin.io",
