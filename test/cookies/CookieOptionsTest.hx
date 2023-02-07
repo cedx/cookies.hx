@@ -1,7 +1,7 @@
 package cookies;
 
 /** Tests the features of the `CookieOptions` class. **/
-class CookieOptionsTest {
+final class CookieOptionsTest {
 
 	/** Creates a new test. **/
 	public function new() {}

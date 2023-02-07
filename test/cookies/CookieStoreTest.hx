@@ -5,7 +5,7 @@ import js.Browser.document;
 using StringTools;
 
 /** Tests the features of the `CookieStore` class. **/
-@:asserts class CookieStoreTest {
+@:asserts final class CookieStoreTest {
 
 	/** Creates a new test. **/
 	public function new() {}
