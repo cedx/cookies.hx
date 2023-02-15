@@ -7,9 +7,8 @@ import sys.io.File;
 function main() {
 	if (FileSystem.exists("docs")) Tools.removeDirectory("docs");
 
-	Sys.command("haxe", ["--define", "doc-gen", "--no-output", "--xml", "var/api.xml", "build.hxml"]);
-	Sys.command("lix", [
-		"run", "dox",
+	Sys.command("haxe --define doc-gen --no-output --xml var/api.xml build.hxml");
+	Sys.command("lix", ["run", "dox",
 		"--define", "description", "Service for interacting with the HTTP cookies, in Haxe.",
 		"--define", "source-path", "https://github.com/cedx/cookies.hx/blob/main/src",
 		"--define", "themeColor", "0xffc105",
