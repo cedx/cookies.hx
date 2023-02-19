@@ -11,6 +11,14 @@ class CookieStore {
 
 	/** The map of all cookies. **/
 	public static var all(get, never): Map<String, String>;
+		static function get_all() {
+			final cookies = document.cookie.length == 0 ? [] : [for (item in document.cookie.split(";")) {
+				final parts = item.ltrim().split("=");
+				if (parts.length >= 2) new Named(parts[0], parts.slice(1).join("=").urlDecode());
+			}];
+
+			return [for (cookie in cookies) cookie.name => cookie.value];
+		}
 
 	/** The default cookie options. **/
 	public final defaults = new CookieOptions();
@@ -39,16 +47,6 @@ class CookieStore {
 			if (options.defaults != null) defaults = options.defaults;
 			if (options.keyPrefix != null) keyPrefix = options.keyPrefix;
 		}
-	}
-
-	/** Gets the map of all cookies. **/
-	static function get_all() {
-		final cookies = document.cookie.length == 0 ? [] : [for (item in document.cookie.split(";")) {
-			final parts = item.ltrim().split("=");
-			if (parts.length >= 2) new Named(parts[0], parts.slice(1).join("=").urlDecode());
-		}];
-
-		return [for (cookie in cookies) cookie.name => cookie.value];
 	}
 
 	/** Removes all entries from this cookie store. **/
