@@ -2,7 +2,8 @@
 	"defaultSeverity": "ERROR",
 	"exclude": {
 		"path": "RELATIVE_TO_PROJECT",
-		"ConditionalCompilation": ["src/cookies/CookieStore"]
+		"ConditionalCompilation": ["src/cookies/CookieStore"],
+		"Dynamic": ["src/cookies/CookieStore"]
 	},
 	"checks": [
 		{"type": "BlockBreakingConditional"},
