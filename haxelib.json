@@ -5,7 +5,7 @@
 	"description": "Service for interacting with the HTTP cookies.",
 	"license": "MIT",
 	"name": "cookies",
-	"releasenote": "Updated the project URL.",
+	"releasenote": "Fixed the typings.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
 	"url": "https://github.com/cedx/cookies.hx",
 	"version": "1.0.2"
