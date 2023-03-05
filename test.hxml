@@ -4,7 +4,7 @@
 --library deep_equal
 --library instrument
 --library tink_unittest
---macro instrument.Instrumentation.coverage(['cookies'], ['src'])
+--macro instrument.Instrumentation.coverage(["cookies"], ["src"])
 --main RunTests
 share/build.hxml
 --cmd node test/RunTests.js
