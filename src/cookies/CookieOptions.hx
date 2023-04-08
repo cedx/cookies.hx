@@ -3,7 +3,8 @@ package cookies;
 import js.lib.Date as JsDate;
 
 /** Defines the attributes of a HTTP cookie. **/
-@:structInit class CookieOptions {
+@:structInit
+final class CookieOptions {
 
 	/** The domain for which the cookie is valid. **/
 	public var domain: Option<String>;
