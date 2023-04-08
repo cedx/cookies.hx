@@ -17,7 +17,7 @@ page.on("pageerror", error => console.error(error));
 page.on("console", async message => {
 	const output = message.text().trim();
 	if (output.startsWith("TN:") && output.endsWith("end_of_record")) coverage.push(output);
-	else console.log(message.text());
+	else if (!output.includes("JavaScript Warning")) console.log(message.text());
 });
 
 await page.evaluate(() => console.log(navigator.userAgent));

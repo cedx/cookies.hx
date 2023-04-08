@@ -6,6 +6,7 @@ using Lambda;
 using StringTools;
 
 /** Provides access to the [HTTP Cookies](https://developer.mozilla.org/docs/Web/HTTP/Cookies). **/
+@:ignoreInstrument
 @:jsonStringify(cookieStore -> [for (key => value in cookieStore) key => value])
 class CookieStore {
 
@@ -21,7 +22,7 @@ class CookieStore {
 		}
 
 	/** The default cookie options. **/
-	public final defaults = new CookieOptions();
+	public final defaults: CookieOptions;
 
 	/** The keys of this cookie store. **/
 	public var keys(get, never): Array<String>;
@@ -35,18 +36,16 @@ class CookieStore {
 	public final onChange: Signal<CookieEvent>;
 
 	/** A string prefixed to every key so that it is unique globally in the whole cookie store. **/
-	final keyPrefix = "";
+	final keyPrefix: String;
 
 	/** The controller of cookie events. **/
 	final onChangeTrigger: SignalTrigger<CookieEvent> = Signal.trigger();
 
 	/** Creates a new cookie store. **/
 	public function new(?options: CookieStoreOptions) {
+		defaults = options?.defaults ?? new CookieOptions();
+		keyPrefix = options?.keyPrefix ?? "";
 		this.onChange = onChangeTrigger.asSignal();
-		if (options != null) {
-			if (options.defaults != null) defaults = options.defaults;
-			if (options.keyPrefix != null) keyPrefix = options.keyPrefix;
-		}
 	}
 
 	/** Removes all entries from this cookie store. **/
