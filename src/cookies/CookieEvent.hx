@@ -1,7 +1,7 @@
 package cookies;
 
 /** An event triggered when the cookie store has been changed. **/
-class CookieEvent {
+final class CookieEvent {
 
 	/** The changed key. **/
 	public final key: String;
