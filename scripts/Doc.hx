@@ -11,7 +11,7 @@ function main() {
 	Sys.command("lix", ["run", "dox",
 		"--define", "description", "Service for interacting with the HTTP cookies, in Haxe.",
 		"--define", "source-path", "https://github.com/cedx/cookies.hx/blob/main/src",
-		"--define", "themeColor", "0xffc105",
+		"--define", "themeColor", "0xea8220",
 		"--define", "version", Version.packageVersion,
 		"--define", "website", "https://github.com/cedx/cookies.hx",
 		"--input-path", "var",
