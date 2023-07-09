@@ -4,8 +4,8 @@
 Service for interacting with the [HTTP cookies](https://developer.mozilla.org/docs/Web/HTTP/Cookies), in [Haxe](https://haxe.org).
 
 ## Documentation
-- [User guide](https://github.com/cedx/cookies.hx/wiki)
-- [API reference](https://docs.belin.io/cookies.hx)
+- [User guide](https://docs.belin.io/cookies.hx)
+- [API reference](https://docs.belin.io/cookies.hx/api)
 
 ## Development
 - [Git repository](https://github.com/cedx/cookies.hx)
@@ -13,4 +13,4 @@ Service for interacting with the [HTTP cookies](https://developer.mozilla.org/do
 - [Submit an issue](https://github.com/cedx/cookies.hx/issues)
 
 ## License
-[Cookies for Haxe](https://github.com/cedx/cookies.hx) is distributed under the MIT License.
+[Cookies for Haxe](https://docs.belin.io/cookies.hx) is distributed under the MIT License.
