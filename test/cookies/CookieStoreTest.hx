@@ -17,7 +17,7 @@ using StringTools;
 	}
 
 	/** Tests the `keys` property. **/
-	public function testKeys() {
+	public function keys() {
 		// It should return an empty array for an empty cookie store.
 		final service = new CookieStore();
 		asserts.assert(service.keys.length == 0);
@@ -38,7 +38,7 @@ using StringTools;
 	}
 
 	/** Tests the `length` property. **/
-	public function testLength() {
+	public function length() {
 		// It should return zero for an empty cookie store.
 		final service = new CookieStore();
 		asserts.assert(service.length == 0);
@@ -54,7 +54,7 @@ using StringTools;
 	}
 
 	/** Tests the `onChange` property. **/
-	public function testOnChange() {
+	public function onChange() {
 		// It should trigger an event when a cookie is added.
 		var service = new CookieStore();
 		var subscription = service.onChange.handle(event -> {
@@ -101,7 +101,7 @@ using StringTools;
 	}
 
 	/** Tests the `clear()` method. **/
-	public function testClear() {
+	public function clear() {
 		// It should remove all cookies.
 		setCookie("foo", "bar");
 		setCookie("prefix:baz", "qux");
@@ -120,7 +120,7 @@ using StringTools;
 	}
 
 	/** Tests the `exists()` method. **/
-	public function testExists() {
+	public function exists() {
 		// It should return `false` if the specified key is not contained.
 		var service = new CookieStore();
 		asserts.assert(!service.exists("foo"));
@@ -141,7 +141,7 @@ using StringTools;
 	}
 
 	/** Tests the `get()` method. **/
-	public function testGet() {
+	public function get() {
 		// It should properly get the cookies.
 		var service = new CookieStore();
 		asserts.assert(service.get("foo") == None);
@@ -172,7 +172,7 @@ using StringTools;
 	}
 
 	/** Tests the `getObject()` method. **/
-	public function testGetObject() {
+	public function getObject() {
 		// It should properly get the deserialized cookies.
 		var service = new CookieStore();
 		asserts.assert(service.getObject("foo") == None);
@@ -215,7 +215,7 @@ using StringTools;
 	}
 
 	/** Tests the `keyValueIterator()` method. **/
-	public function testKeyValueIterator() {
+	public function keyValueIterator() {
 		final service = new CookieStore();
 
 		// It should end iteration immediately if the cookie store is empty.
@@ -243,7 +243,7 @@ using StringTools;
 	}
 
 	/** Tests the `putIfAbsent()` method. **/
-	public function testPutIfAbsent() {
+	public function putIfAbsent() {
 		// It should add a new entry if it does not exist.
 		var service = new CookieStore();
 		asserts.assert(getCookie("foo") == null);
@@ -269,7 +269,7 @@ using StringTools;
 	}
 
 	/** Tests the `putObjectIfAbsent()` method. **/
-	public function testPutObjectIfAbsent() {
+	public function putObjectIfAbsent() {
 		// It should add a new entry if it does not exist.
 		var service = new CookieStore();
 		asserts.assert(getCookie("foo") == null);
@@ -295,7 +295,7 @@ using StringTools;
 	}
 
 	/** Tests the `remove()` method. **/
-	public function testRemove() {
+	public function remove() {
 		setCookie("foo", "bar");
 		setCookie("prefix:baz", "qux");
 
@@ -313,7 +313,7 @@ using StringTools;
 	}
 
 	/** Tests the `set()` method. **/
-	public function testSet() {
+	public function set() {
 		// It should properly set the cookies.
 		var service = new CookieStore();
 		asserts.assert(getCookie("foo") == null);
@@ -338,7 +338,7 @@ using StringTools;
 	}
 
 	/** Tests the `setObject()` method. **/
-	public function testSetObject() {
+	public function setObject() {
 		// It should properly serialize and set the cookies.
 		var service = new CookieStore();
 		asserts.assert(getCookie("foo") == null);
@@ -369,7 +369,7 @@ using StringTools;
 	}
 
 	/** Tests the `toJSON()` method. **/
-	public function testToJson() {
+	public function toJson() {
 		// It should return an empty array for an empty cookie store.
 		final service = new CookieStore();
 		asserts.assert(Json.stringify(service) == "[]");
@@ -391,7 +391,7 @@ using StringTools;
 	}
 
 	/** Tests the `toString()` method. **/
-	public function testToString() {
+	public function toString() {
 		// It should return an empty string for an empty cookie store.
 		final service = new CookieStore();
 		asserts.assert(service.toString().length == 0);
