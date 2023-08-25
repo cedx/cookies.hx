@@ -5,7 +5,7 @@
 	"description": "Service for interacting with the HTTP cookies.",
 	"license": "MIT",
 	"name": "cookies",
-	"releasenote": "Made `final` the `CookieEvent` and `CookieOptions` classes, updated the dependencies, use the null coalescing operator.",
+	"releasenote": "Use generics for the signature of the `getObject()`, `putObjectIfAbsent()` and `setObject()` methods of the `CookieStore` class.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
 	"url": "https://docs.belin.io/cookies.hx",
 	"version": "1.2.0"

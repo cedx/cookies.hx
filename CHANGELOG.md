@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [1.2.0](https://github.com/cedx/cookies.hx/compare/v1.1.0...v1.2.0)
+- Use generics for the signature of the `getObject()`, `putObjectIfAbsent()` and `setObject()` methods of the `CookieStore` class.
+
 ## Version [1.1.0](https://github.com/cedx/cookies.hx/compare/v1.0.2...v1.1.0)
 - Made `final` the `CookieEvent` and `CookieOptions` classes.
 - Updated the dependencies.
