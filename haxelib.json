@@ -8,5 +8,5 @@
 	"releasenote": "Made `final` the `CookieEvent` and `CookieOptions` classes, updated the dependencies, use the null coalescing operator.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
 	"url": "https://docs.belin.io/cookies.hx",
-	"version": "1.1.0"
+	"version": "1.2.0"
 }
