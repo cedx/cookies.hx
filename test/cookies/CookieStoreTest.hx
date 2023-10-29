@@ -10,7 +10,7 @@ using StringTools;
 	/** Creates a new test. **/
 	public function new() {}
 
-	/** This method is invoked before each test. **/
+	/** Method invoked before each test. **/
 	@:before public function before() {
 		for (key in CookieStore.all.keys()) removeCookie(key);
 		return Noise;
