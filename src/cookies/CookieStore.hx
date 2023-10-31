@@ -129,11 +129,6 @@ class CookieStore {
 			case Success(json): set(key, json, options);
 		}
 
-	#if !tink_json
-	/** Converts this cookie store to a JSON representation. **/
-	public function toJSON() return [for (key => value in this) [key, value]];
-	#end
-
 	/** Returns a string representation of this object. **/
 	public function toString()
 		return keyPrefix.length == 0 ? document.cookie : [for (key => value in this) '$key=${value.urlEncode()}'].join("; ");
