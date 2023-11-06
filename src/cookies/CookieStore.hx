@@ -25,7 +25,7 @@ class CookieStore {
 
 	/** The keys of this cookie store. **/
 	public var keys(get, never): Array<String>;
-		function get_keys() return [for (key in all.keys()) if (key.startsWith(keyPrefix)) key.substring(keyPrefix.length)];
+		function get_keys() return [for (key in all.keys()) if (key.startsWith(keyPrefix)) key.substr(keyPrefix.length)];
 
 	/** The number of entries in this cookie store. **/
 	public var length(get, never): Int;
