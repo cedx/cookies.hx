@@ -4,12 +4,12 @@ const {rm, writeFile} = require("node:fs/promises");
 const {createServer} = require("node:http");
 const {EOL} = require("node:os");
 const process = require("node:process");
-const {chromium} = require("playwright");
+const puppeteer = require("puppeteer");
 const handler = require("serve-handler");
 
 (async function() {
 	// Start the browser.
-	const browser = await chromium.launch();
+	const browser = await puppeteer.launch({headless: "new"});
 	const coverage = [];
 	const page = await browser.newPage();
 	const server = createServer((req, res) => handler(req, res, {public: "var"}));
@@ -18,7 +18,7 @@ const handler = require("serve-handler");
 	page.on("console", async message => {
 		const output = message.text().trim();
 		if (output.startsWith("TN:") && output.endsWith("end_of_record")) coverage.push(output);
-		else if (!output.startsWith("[JavaScript Warning:")) console.log(message.text());
+		else console.log(message.text());
 	});
 
 	await page.evaluate(() => console.log(navigator.userAgent));
