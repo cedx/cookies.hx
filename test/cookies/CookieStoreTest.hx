@@ -368,7 +368,7 @@ using StringTools;
 		return asserts.done();
 	}
 
-	/** Tests the `toJSON()` method. **/
+	/** Tests the JSON serialization. **/
 	public function toJson() {
 		// It should return an empty array for an empty cookie store.
 		final service = new CookieStore();
