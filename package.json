@@ -1,8 +1,6 @@
 {
 	"bugs": "https://github.com/cedx/cookies.hx/issues",
 	"description": "Service for interacting with the HTTP cookies.",
-	"files": [],
-	"homepage": "https://cedx.github.io/cookies.hx",
 	"license": "MIT",
 	"name": "@cedx/cookies",
 	"private": true,

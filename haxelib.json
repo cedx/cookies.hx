@@ -7,6 +7,6 @@
 	"name": "cookies",
 	"releasenote": "Use generics for the signature of the `getObject()`, `putObjectIfAbsent()` and `setObject()` methods of the `CookieStore` class.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
-	"url": "https://cedx.github.io/cookies.hx",
+	"url": "https://github.com/cedx/cookies.hx",
 	"version": "1.2.0"
 }

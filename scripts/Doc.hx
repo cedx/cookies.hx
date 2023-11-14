@@ -15,7 +15,7 @@ function main() {
 		"--define", "source-path", "https://github.com/cedx/cookies.hx/blob/main/src",
 		"--define", "themeColor", "0xea8220",
 		"--define", "version", Platform.packageVersion,
-		"--define", "website", "https://cedx.github.io/cookies.hx",
+		"--define", "website", "https://github.com/cedx/cookies.hx",
 		"--input-path", "var",
 		"--output-path", "docs/api",
 		"--title", "Cookies for Haxe",
