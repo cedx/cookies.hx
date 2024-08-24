@@ -1,11 +1,15 @@
 # Changelog
 
+## Version [2.0.0](https://github.com/cedx/cookies.hx/compare/v1.2.0...v2.0.0)
+- Breaking change: removed the `putIfAbsent()` and `putObjectIfAbsent()` methods from the `CookieStore` class.
+- Updated the package dependencies.
+
 ## Version [1.2.0](https://github.com/cedx/cookies.hx/compare/v1.1.0...v1.2.0)
 - Use generics for the signature of the `getObject()`, `putObjectIfAbsent()` and `setObject()` methods of the `CookieStore` class.
 
 ## Version [1.1.0](https://github.com/cedx/cookies.hx/compare/v1.0.2...v1.1.0)
 - Made `final` the `CookieEvent` and `CookieOptions` classes.
-- Updated the dependencies.
+- Updated the package dependencies.
 - Use the null coalescing operator.
 
 ## Version [1.0.2](https://github.com/cedx/cookies.hx/compare/v1.0.1...v1.0.2)

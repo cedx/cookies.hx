@@ -5,7 +5,8 @@
 	"description": "Service for interacting with the HTTP cookies.",
 	"license": "MIT",
 	"name": "cookies",
-	"releasenote": "Use generics for the signature of the `getObject()`, `putObjectIfAbsent()` and `setObject()` methods of the `CookieStore` class.",
+	"releasenote": "Removed the `putIfAbsent()` and `putObjectIfAbsent()` methods from the `CookieStore` class, updated the package dependencies.",
 	"tags": ["browser", "cookies", "events", "html", "js", "service", "tink"],
 	"url": "https://github.com/cedx/cookies.hx",
+	"version": "2.0.0"
 }
