@@ -49,7 +49,8 @@ class CookieStore {
 	}
 
 	/** Removes all entries from this cookie store. **/
-	public function clear(?options: CookieOptions) keys.iter(key -> remove(key, options));
+	public function clear(?options: CookieOptions): Void
+		keys.iter(key -> remove(key, options));
 
 	/** Gets a value indicating whether this cookie store contains the specified `key`. **/
 	public function exists(key: String): Bool
