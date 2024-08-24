@@ -52,7 +52,8 @@ class CookieStore {
 	public function clear(?options: CookieOptions) keys.iter(key -> remove(key, options));
 
 	/** Gets a value indicating whether this cookie store contains the specified `key`. **/
-	public function exists(key: String) return all.exists(buildKey(key));
+	public function exists(key: String): Bool
+		return all.exists(buildKey(key));
 
 	/** Gets the value associated with the specified `key`. Returns `None` if the `key` does not exist. **/
 	public function get(key: String): Option<String> {
@@ -77,31 +78,10 @@ class CookieStore {
 		return new CookieStoreIterator(this);
 
 	/**
-		Looks up the value of the specified `key`, or add a new value if it isn't there.
-		Returns the value associated with `key`, if there is one.
-		Otherwise calls `ifAbsent` to get a new value, associates `key` with that value, and then returns the new value.
-	**/
-	public function putIfAbsent(key: String, ifAbsent: () -> String, ?options: CookieOptions) return switch get(key) {
-		case Some(value): Success(value);
-		case None: final value = ifAbsent(); set(key, value, options).map(_ -> value);
-	}
-
-	/**
-		Looks up the value of the specified `key`, or add a new value if it isn't there.
-		Returns the deserialized value associated with `key`, if there is one.
-		Otherwise calls `ifAbsent` to get a new value, serializes it and associates `key` with that value, and then returns the new value.
-	**/
-	public function putObjectIfAbsent<T>(key: String, ifAbsent: () -> T, ?options: CookieOptions): Outcome<T, Error>
-		return switch getObject(key) {
-			case Some(value): Success(value);
-			case None: final value = ifAbsent(); setObject(key, value, options).map(_ -> value);
-		}
-
-	/**
 		Removes the value associated with the specified `key`.
 		Returns the value associated with the `key` before it was removed.
 	**/
-	public function remove(key: String, ?options: CookieOptions) {
+	public function remove(key: String, ?options: CookieOptions): Option<String> {
 		final oldValue = get(key);
 		removeItem(buildKey(key), options);
 		onChangeTrigger.trigger(new CookieEvent(key, oldValue));
@@ -130,11 +110,12 @@ class CookieStore {
 		}
 
 	/** Returns a string representation of this object. **/
-	public function toString()
+	public function toString(): String
 		return keyPrefix.length == 0 ? document.cookie : [for (key => value in this) '$key=${value.urlEncode()}'].join("; ");
 
 	/** Builds a normalized cookie key from the given `key`. **/
-	function buildKey(key: String) return '$keyPrefix$key';
+	function buildKey(key: String): String
+		return '$keyPrefix$key';
 
 	/** Merges the default cookie options with the specified ones. **/
 	function getOptions(?options: CookieOptions): CookieOptions {
@@ -177,10 +158,11 @@ private class CookieStoreIterator {
 	}
 
 	/** Returns a value indicating whether the iteration is complete. **/
-	public function hasNext() return index < keys.length;
+	public function hasNext(): Bool
+		return index < keys.length;
 
 	/** Returns the current item of the iterator and advances to the next one. **/
-	public function next() {
+	public function next(): {key: String, value: String} {
 		final key = keys[index++];
 		return {key: key, value: cookieStore.get(key).sure()};
 	}

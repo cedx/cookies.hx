@@ -242,58 +242,6 @@ using StringTools;
 		return asserts.done();
 	}
 
-	/** Tests the `putIfAbsent()` method. **/
-	public function putIfAbsent() {
-		// It should add a new entry if it does not exist.
-		var service = new CookieStore();
-		asserts.assert(getCookie("foo") == null);
-		asserts.assert(service.putIfAbsent("foo", () -> "bar").equals("bar"));
-		asserts.assert(getCookie("foo") == "bar");
-
-		// It should not add a new entry if it already exists.
-		setCookie("foo", "123");
-		asserts.assert(service.putIfAbsent("foo", () -> "XYZ").equals("123"));
-		asserts.assert(getCookie("foo") == "123");
-
-		// It should handle the key prefix.
-		service = new CookieStore({keyPrefix: "prefix:"});
-		asserts.assert(getCookie("prefix:baz") == null);
-		asserts.assert(service.putIfAbsent("baz", () -> "qux").equals("qux"));
-		asserts.assert(getCookie("prefix:baz") == "qux");
-
-		setCookie("prefix:baz", "456");
-		asserts.assert(service.putIfAbsent("baz", () -> "XYZ").equals("456"));
-		asserts.assert(getCookie("prefix:baz") == "456");
-
-		return asserts.done();
-	}
-
-	/** Tests the `putObjectIfAbsent()` method. **/
-	public function putObjectIfAbsent() {
-		// It should add a new entry if it does not exist.
-		var service = new CookieStore();
-		asserts.assert(getCookie("foo") == null);
-		asserts.assert(service.putObjectIfAbsent("foo", () -> "bar").equals("bar"));
-		asserts.assert(getCookie("foo") == '"bar"');
-
-		// It should not add a new entry if it already exists.
-		setCookie("foo", "123");
-		asserts.assert(service.putObjectIfAbsent("foo", () -> 999).equals(123));
-		asserts.assert(getCookie("foo") == "123");
-
-		// It should handle the key prefix.
-		service = new CookieStore({keyPrefix: "prefix:"});
-		asserts.assert(getCookie("prefix:baz") == null);
-		asserts.assert(service.putObjectIfAbsent("baz", () -> "qux").equals("qux"));
-		asserts.assert(getCookie("prefix:baz") == '"qux"');
-
-		setCookie("prefix:baz", "456");
-		asserts.assert(service.putObjectIfAbsent("baz", () -> 999).equals(456));
-		asserts.assert(getCookie("prefix:baz") == "456");
-
-		return asserts.done();
-	}
-
 	/** Tests the `remove()` method. **/
 	public function remove() {
 		setCookie("foo", "bar");

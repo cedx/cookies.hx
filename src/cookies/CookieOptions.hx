@@ -35,7 +35,7 @@ final class CookieOptions {
 	}
 
 	/** Returns a string representation of this object. **/
-	public function toString() {
+	public function toString(): String {
 		final value = [];
 		if (domain != None) value.push('domain=${domain.sure()}');
 		if (expires != None) value.push('expires=${JsDate.fromHaxeDate(expires.sure()).toUTCString()}');
