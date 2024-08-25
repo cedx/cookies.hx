@@ -41,7 +41,6 @@ class CookieStore {
 	final onChangeTrigger: SignalTrigger<CookieEvent> = Signal.trigger();
 
 	/** Creates a new cookie store. **/
-	@:ignoreInstrument
 	public function new(?options: CookieStoreOptions) {
 		defaults = options?.defaults ?? new CookieOptions();
 		keyPrefix = options?.keyPrefix ?? "";
