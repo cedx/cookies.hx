@@ -1,7 +1,2 @@
 --js var/build.js
 share/build.hxml
-
-cookies.CookieEvent
-cookies.CookieOptions
-cookies.CookieStore
-cookies.SameSite
