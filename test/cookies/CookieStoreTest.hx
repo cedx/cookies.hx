@@ -355,11 +355,14 @@ using StringTools;
 	}
 
 	/** Gets the value of the cookie with the specified name. **/
-	inline function getCookie(name: String) return CookieStore.all[name];
+	inline function getCookie(name: String): Null<String>
+		return CookieStore.all[name];
 
 	/** Removes the cookie with the specified name. **/
-	inline function removeCookie(name: String) document.cookie = '$name=; expires=Thu, 01 Jan 1970 00:00:00 GMT; max-age=0';
+	inline function removeCookie(name: String): Void
+		document.cookie = '$name=; expires=Thu, 01 Jan 1970 00:00:00 GMT; max-age=0';
 
 	/** Sets a cookie with the specified name and value. **/
-	inline function setCookie(name: String, value: String) document.cookie = '$name=${value.urlEncode()}';
+	inline function setCookie(name: String, value: String): Void
+		document.cookie = '$name=${value.urlEncode()}';
 }
